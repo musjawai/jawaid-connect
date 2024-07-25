@@ -11,19 +11,21 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: {
-    required: true,
     type: String,
+    required: true,
     unique: true,
   },
   password: {
-    required: true,
     type: String,
+    required: true,
   },
   createdAt: {
+    type: Date,
     required: true,
     default: Date.now,
   },
   updatedAt: {
+    type: Date,
     required: true,
     default: Date.now,
   },
