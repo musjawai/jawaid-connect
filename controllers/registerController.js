@@ -28,9 +28,6 @@ const handleNewUser = async (req, res) => {
       lastName: lastname,
     });
 
-    console.log(auth);
-    console.log(profile);
-
     res.status(201).json({ message: `${user} successfully created!` });
   } catch (err) {
     res.status(500).json({ message: err.message });

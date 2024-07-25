@@ -11,11 +11,11 @@ const handleRefreshToken = async (req, res) => {
   if (!foundUser) return res.sendStatus(403);
 
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-    if (err || foundUser.username !== decoded.username) {
+    if (err || foundUser._id !== decoded._id) {
       return res.sendStatus(403);
     }
     const accessToken = jwt.sign(
-      { username: decoded.username },
+      { _id: decoded._id },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "300s" }
     );

@@ -21,6 +21,11 @@ const userProfileSchema = new Schema({
     required: true,
     unique: true,
   },
+  username: {
+    type: String,
+    requried: true,
+    unique: true,
+  },
   firstName: {
     type: String,
     required: true,
