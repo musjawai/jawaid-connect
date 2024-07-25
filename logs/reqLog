@@ -62,3 +62,6 @@
 20240725	00:26:50	e58d5d7e-2105-4aff-9013-890ad3760def	POST	undefined	/auth
 20240725	00:26:57	0ddca000-c3f4-4625-8363-2ac17071f078	GET	undefined	/refresh
 20240725	00:28:00	e13332c3-ae9e-47ac-a805-2ef30666b5f2	GET	undefined	/refresh
+20240725	14:11:28	a630e8ab-2775-478f-8bd8-bcbee11add8f	POST	undefined	/register
+20240725	14:12:30	17ae3034-9f67-4034-977f-ddb9c978cbc5	POST	undefined	/register
+20240725	14:13:21	a7ded5c3-6b56-46a1-9df4-0d90d326eec2	POST	undefined	/register
