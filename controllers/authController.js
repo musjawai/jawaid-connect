@@ -14,6 +14,7 @@ const handleLogin = async (req, res) => {
   if (!foundUser) return res.sendStatus(401);
   const match = await bcrypt.compare(pwd, foundUser.password);
   if (match) {
+    console.log(foundUser._id);
     const accessToken = jwt.sign(
       { _id: foundUser._id.toString() },
       process.env.ACCESS_TOKEN_SECRET,

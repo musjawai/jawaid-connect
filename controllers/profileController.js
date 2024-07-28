@@ -1,10 +1,19 @@
 const userProfile = require("../model/userProfile");
+const mongoose = require("mongoose");
 
 const myProfile = async (req, res) => {
-  console.log("hello");
-  const profile = await userProfile.findOne({ _id: req._id });
-  if (!profile) return res.status(204).json({ message: "No one is logged in" });
-  res.json(profile);
+  console.log(req._id);
+  if (!req._id) return res.sendStatus(204);
+  try {
+    const profile = await userProfile.findOne({ userId: req._id });
+    console.log(profile);
+    if (!profile)
+      return res.status(204).json({ message: "No one is logged in" });
+    res.json(profile);
+  } catch (error) {
+    console.error("Error fetching your profile: ", error);
+    res.status(500).json({ message: "Server Error" });
+  }
 };
 
 const viewProfile = async (req, res) => {
