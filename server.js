@@ -32,6 +32,7 @@ app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
 
 app.use("/profile", require("./routes/api/profiles"));
+app.use("/posts", require("./routes/api/posts"));
 
 app.use(errorHandler);
 
