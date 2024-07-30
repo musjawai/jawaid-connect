@@ -22,8 +22,12 @@ const postsSchema = new mongoose.Schema({
       content: { type: String, required: true },
       createdAt: { type: Date, required: Date.now },
     },
-    { timestamps: true },
   ],
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("posts", postsSchema);
