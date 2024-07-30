@@ -15,12 +15,35 @@ const allPosts = async (req, res) => {
 
 const getPost = async (req, res) => {
   if (!req?.params.postId) return res.sendStatus(400);
-  const post = await Posts.findById(req.params.postId);
-  if (!post)
-    return res
-      .status(204)
-      .json({ message: `Tweet ID ${req.params.postId} does not exist` });
-  res.json(post);
+  try {
+    const post = await Posts.findById(req.params.postId);
+    if (!post)
+      return res
+        .status(204)
+        .json({ message: `Tweet ID ${req.params.postId} does not exist` });
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const editPost = async (req, res) => {
+  console.log(req._id);
+  if (!req._id) return res.sendStatus(204);
+  if (!req?.params.postId) return res.sendStatus(400);
+  if (!req?.body.content) return res.sendStatus(204);
+  try {
+    const post = await Posts.findOne({
+      _id: req.params.postId,
+      userId: req._id,
+    });
+    if (!post) return res.status(204).json({ message: "Tweet not found" });
+    post.content = req.body.content;
+    await post.save();
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 const createPost = async (req, res) => {
@@ -34,12 +57,11 @@ const createPost = async (req, res) => {
     });
     user.tweetsCount = user.tweetsCount + 1;
     await user.save();
-    console.log(post);
-    res.status(201).json({ message: `Post created by ${user.username}` });
+    res.status(201).json(post);
   } catch (err) {
     console.error("Error creating post:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-module.exports = { createPost, allPosts, getPost };
+module.exports = { createPost, allPosts, getPost, editPost };
