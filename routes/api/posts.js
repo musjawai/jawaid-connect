@@ -8,4 +8,5 @@ router
   .post(verifyJWT, postsController.createPost)
   .get(postsController.allPosts);
 
+router.route("/:postId").get(postsController.getPost);
 module.exports = router;

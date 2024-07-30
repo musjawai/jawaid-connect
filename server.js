@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 app = express();
 
 const { logger } = require("./middleware/logEvents");
-const errorHandler = require("./middleware/errorHandler");
+const { errorHandler } = require("./middleware/errorHandler");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const verifyJWT = require("./middleware/verifyJWT");
