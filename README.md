@@ -25,3 +25,26 @@ This is a Node.js-based social media platform that allows users to register, aut
    git clone https://github.com/yourusername/social-media-platform.git
    cd social-media-platform
    ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   Create a .env file in the root of the directory and add the following variables:
+
+   ```bash
+   DATABASE_URI = mongodb....
+   ACCESS_TOKEN_SECRET = 123456789123456789abcedfgabcdefg
+   REFRESH_TOKEN_SECRET = 123456789123456789abcedfgabcdefg
+   PORT = 3000
+   ```
+
+4. **Start the server**
+
+   ```bash
+   npm start
+   ```
