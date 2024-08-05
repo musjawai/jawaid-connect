@@ -30,6 +30,8 @@ const userSchema = new Schema({
     default: Date.now,
   },
   refreshToken: String,
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 module.exports = mongoose.model("User", userSchema);
