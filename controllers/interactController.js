@@ -68,4 +68,30 @@ const commentPost = async (req, res) => {
   }
 };
 
-module.exports = { likePost, unlikePost, commentPost };
+const deleteComment = async (req, res) => {
+  if (!req._id) return res.sendStatus(204);
+  if (!req?.params.postId || !req?.params.commentId) return res.sendStatus(400);
+  try {
+    const postToEdit = await Posts.findOne({ _id: req.params.postId });
+    if (!postToEdit)
+      return res.status(404).json({ message: "Post does not exist" });
+    const commentToDelete = postToEdit.comments.find((comment) =>
+      comment._id.equals(req.params.commentId)
+    );
+
+    if (!commentToDelete)
+      return res.status(404).json({ message: "Comment does not exist" });
+    if (commentToDelete.user.toString() !== req._id.toString())
+      return res.status(403).json({ message: "Unauthorized" });
+    await Posts.findOneAndUpdate(
+      { _id: req.params.postId },
+      { $pull: { comments: { _id: req.params.commentId } } },
+      { new: true }
+    );
+    res.json({ message: `Comment deleted: ${commentToDelete.content}` });
+  } catch (err) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+module.exports = { likePost, unlikePost, commentPost, deleteComment };
