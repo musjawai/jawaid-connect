@@ -13,6 +13,14 @@ router.route("/:postId/like").post(verifyJWT, interactController.likePost);
 router.route("/:postId/unlike").post(verifyJWT, interactController.unlikePost);
 
 router
+  .route("/:postId/comment/:commentId")
+  .delete(verifyJWT, interactController.deleteComment);
+
+router
+  .route("/:postId/comment")
+  .post(verifyJWT, interactController.commentPost);
+
+router
   .route("/:postId")
   .get(postsController.getPost)
   .put(verifyJWT, postsController.editPost);
